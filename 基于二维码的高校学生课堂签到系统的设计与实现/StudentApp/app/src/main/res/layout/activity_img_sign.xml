@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+    <com.flurgle.camerakit.CameraView
+            android:id="@+id/camera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+
+    </com.flurgle.camerakit.CameraView>
+
+    <GridView
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="170px"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="#B06B6B6B" />
+
+    <ImageView
+            android:id="@+id/scan_line"
+            android:layout_width="match_parent"
+            android:layout_height="20px"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="#63303F9F" />
+
+    <GridView
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="170px"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:background="#B06B6B6B" />
+
+    <Button
+            android:id="@+id/button_capture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="识别"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+
+    <ImageView
+            android:id="@+id/faceview"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/face" />
+</RelativeLayout>

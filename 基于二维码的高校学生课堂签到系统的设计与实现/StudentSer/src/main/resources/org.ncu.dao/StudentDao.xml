@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ncu.dao.StudentDao">
+    <resultMap id="studentMap" type="Student">
+        <id column="student_id" property="student_id"/>
+        <result column="student_account" property="student_account"/>
+        <result column="student_password" property="student_password"/>
+        <result column="student_cardid" property="student_cardid"/>
+        <result column="student_name" property="student_name"/>
+        <result column="student_sex" property="student_sex"/>
+        <result column="student_joinyear" property="student_joinyear"/>
+        <result column="student_stuyear" property="student_stuyear"/>
+        <result column="student_major" property="student_major"/>
+        <result column="student_class" property="student_class"/>
+        <result column="student_phone" property="student_phone"/>
+        <result column="student_emile" property="student_emile"/>
+        <result column="student_address" property="student_address"/>
+        <result column="student_extra" property="student_extra"/>
+    </resultMap>
+    <select id="countStudentByAccount" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM signdb.t_student
+        WHERE student_account = #{student_account}
+    </select>
+    <select id="makeSureStudentPass" resultType="int">
+        SELECT count(*)
+        FROM signdb.t_student
+        WHERE student_account = #{0} AND student_password = #{1}
+    </select>
+    <select id="findStudentByAccAndPass" resultType="Student">
+        SELECT *
+        FROM signdb.t_student
+        WHERE student_account = #{0} AND student_password = #{1}
+    </select>
+    <select id="findStudentByClass" resultMap="studentMap">
+        SELECT *
+        FROM signdb.t_student
+        WHERE student_major = #{0} AND student_class = #{1}
+    </select>
+    <select id="countStudentByClass" resultType="int">
+        SELECT count(*)
+        FROM signdb.t_student
+        WHERE student_major = #{0} AND student_class = #{1}
+    </select>
+</mapper>

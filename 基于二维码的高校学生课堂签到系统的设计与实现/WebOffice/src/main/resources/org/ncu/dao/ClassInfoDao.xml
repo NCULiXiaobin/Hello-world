@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ncu.dao.ClassInfoDao">
+    <resultMap id="classInfoMap" type="ClassInfo">
+        <id column="class_id" property="class_id" />
+        <result column="major_name" property="major_name" />
+        <result column="class_name" property="class_name" />
+    </resultMap>
+
+    <select id="findClassByMajor" resultMap="classInfoMap" parameterType="String">
+        SELECT *
+        FROM signdb.t_classinfo
+        WHERE major_name = #{major_name}
+    </select>
+    <select id="findClassByName" resultType="ClassInfo">
+        SELECT *
+        FROM signdb.t_classinfo
+        WHERE  major_name = #{0} AND class_name = #{1}
+    </select>
+</mapper>

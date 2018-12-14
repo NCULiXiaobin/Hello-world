@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ncu.dao.SignDao">
+   <resultMap id="SignMap" type="Sign">
+       <result column="sign_id" property="sign_id"></result>
+       <result column="sign_techer" property="sign_teacher"></result>
+       <result column="sign_major" property="sign_major"></result>
+       <result column="sign_class" property="sign_class"></result>
+       <result column="sign_time" property="sign_time"></result>
+       <result column="sign_people" property="sign_people"></result>
+   </resultMap>
+
+    <insert id="insertSignMes" parameterType="Sign">
+        INSERT INTO signdb.t_sign
+        (sign_teacher, sign_major, sign_class, sign_time, sign_people)
+        VALUES (#{sign_teacher},#{sign_major},#{sign_class},#{sign_time},#{sign_people})
+    </insert>
+    <select id="selectSignMes" parameterType="String" resultMap="SignMap">
+        SELECT * FROM signdb.t_sign WHERE sign_teacher = #{teacher_account}
+    </select>
+    <select id="selectMesByTime" resultType="Sign">
+        SELECT * FROM signdb.t_sign WHERE sign_teacher = #{teacherAccount} AND sign_time = #{timestamp}
+    </select>
+</mapper>

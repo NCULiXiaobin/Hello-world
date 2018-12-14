@@ -1,0 +1,15 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+    <WebView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/webView"
+            android:visibility="gone"/>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:text="加载中。。。"
+              android:id="@+id/proview"
+              android:visibility="gone"/>
+</RelativeLayout>

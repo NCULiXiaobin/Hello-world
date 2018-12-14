@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">StudentApp</string>
+    <string name="major">专业：</string>
+    <string name="stuname">姓名：</string>
+    <string name="stusex">性别：</string>
+    <string name="stuclass">班级：</string>
+    <string name="joinyear">入学时间：</string>
+    <string name="stuyear">在校时间：</string>
+    <string name="phone">联系方式：</string>
+    <string name="emile">电子邮箱：</string>
+    <string name="address">家庭住址：</string>
+    <string name="numSign">口令签到</string>
+    <string name="imgSign">扫码签到</string>
+</resources>

@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ajax智能搜索框:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ajax_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ajax智能搜索框/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ajax智能搜索框" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

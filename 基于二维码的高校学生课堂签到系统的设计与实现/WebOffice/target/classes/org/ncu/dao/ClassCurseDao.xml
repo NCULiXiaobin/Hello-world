@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ncu.dao.ClassCurseDao">
+    <resultMap id="ClassCurseMap" type="ClassCurse">
+        <id column="class_curse_id" property="class_curse_id"></id>
+        <result column="class_curse_major" property="class_curse_major"></result>
+        <result column="class_curse_name" property="class_curse_name"></result>
+        <result column="class_curse_classname" property="class_curse_classname"></result>
+        <result column="class_curse_day" property="class_curse_day"></result>
+        <result column="class_curse_index" property="class_curse_index"></result>
+        <result column="class_curse_teacher" property="class_curse_teacher"></result>
+        <result column="class_curse_teacher_name" property="class_curse_teacher_name"></result>
+    </resultMap>
+    
+    <select id="findCurseInfo" resultMap="ClassCurseMap">
+        SELECT * FROM signdb.t_class_curse
+        WHERE class_curse_major = #{0}
+        AND class_curse_classname = #{1}
+    </select>
+
+    <select id="queryClassCurseCount" parameterType="ClassCurse" resultType="int">
+        SELECT count(*) FROM signdb.t_class_curse
+        WHERE class_curse_major = #{class_curse_major}
+        AND  class_curse_classname = #{class_curse_classname}
+        AND  class_curse_teacher = #{class_curse_teacher}
+        AND  class_curse_name = #{class_curse_name}
+        AND  class_curse_day = #{class_curse_day}
+        AND  class_curse_index = #{class_curse_index}
+    </select>
+</mapper>

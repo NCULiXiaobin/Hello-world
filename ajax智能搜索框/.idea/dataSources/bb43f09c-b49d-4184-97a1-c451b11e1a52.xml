@@ -1,0 +1,990 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - @localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.7">
+    <root id="1"/>
+    <schema id="2" parent="1" name="sakila">
+      <Visible>1</Visible>
+    </schema>
+    <table id="3" parent="2" name="actor"/>
+    <table id="4" parent="2" name="address"/>
+    <table id="5" parent="2" name="category"/>
+    <table id="6" parent="2" name="city"/>
+    <table id="7" parent="2" name="country"/>
+    <table id="8" parent="2" name="customer"/>
+    <table id="9" parent="2" name="film"/>
+    <table id="10" parent="2" name="film_actor"/>
+    <table id="11" parent="2" name="film_category"/>
+    <table id="12" parent="2" name="film_text"/>
+    <table id="13" parent="2" name="inventory"/>
+    <table id="14" parent="2" name="language"/>
+    <table id="15" parent="2" name="payment"/>
+    <table id="16" parent="2" name="rental"/>
+    <table id="17" parent="2" name="staff"/>
+    <table id="18" parent="2" name="store"/>
+    <table id="19" parent="2" name="info"/>
+    <view id="20" parent="2" name="actor_info">
+      <Comment>VIEW</Comment>
+    </view>
+    <view id="21" parent="2" name="customer_list">
+      <Comment>VIEW</Comment>
+    </view>
+    <view id="22" parent="2" name="film_list">
+      <Comment>VIEW</Comment>
+    </view>
+    <view id="23" parent="2" name="nicer_but_slower_film_list">
+      <Comment>VIEW</Comment>
+    </view>
+    <view id="24" parent="2" name="sales_by_film_category">
+      <Comment>VIEW</Comment>
+    </view>
+    <view id="25" parent="2" name="sales_by_store">
+      <Comment>VIEW</Comment>
+    </view>
+    <view id="26" parent="2" name="staff_list">
+      <Comment>VIEW</Comment>
+    </view>
+    <routine id="27" parent="2" name="film_in_stock">
+      <RoutineKind>procedure</RoutineKind>
+    </routine>
+    <routine id="28" parent="2" name="film_not_in_stock">
+      <RoutineKind>procedure</RoutineKind>
+    </routine>
+    <routine id="29" parent="2" name="get_customer_balance">
+      <RoutineKind>function</RoutineKind>
+    </routine>
+    <routine id="30" parent="2" name="inventory_held_by_customer">
+      <RoutineKind>function</RoutineKind>
+    </routine>
+    <routine id="31" parent="2" name="inventory_in_stock">
+      <RoutineKind>function</RoutineKind>
+    </routine>
+    <routine id="32" parent="2" name="rewards_report">
+      <Comment>Provides a customizable report on best customers</Comment>
+      <RoutineKind>procedure</RoutineKind>
+    </routine>
+    <column id="33" parent="3" name="actor_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="3" name="first_name">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="3" name="last_name">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="3" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <index id="37" parent="3" name="idx_actor_last_name">
+      <ColNames>last_name</ColNames>
+    </index>
+    <key id="38" parent="3" name="PRIMARY">
+      <ColNames>actor_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="39" parent="4" name="address_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="4" name="address">
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="41" parent="4" name="address2">
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="42" parent="4" name="district">
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="43" parent="4" name="city_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="44" parent="4" name="postal_code">
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="45" parent="4" name="phone">
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="4" name="location">
+      <DataType>geometry|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="47" parent="4" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <index id="48" parent="4" name="idx_fk_city_id">
+      <ColNames>city_id</ColNames>
+    </index>
+    <index id="49" parent="4" name="idx_location">
+      <ColNames>location</ColNames>
+    </index>
+    <key id="50" parent="4" name="PRIMARY">
+      <ColNames>address_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="51" parent="4" name="fk_address_city">
+      <ColNames>city_id</ColNames>
+      <RefTableName>city</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>city_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <column id="52" parent="5" name="category_id">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="5" name="name">
+      <DataType>varchar(25)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="54" parent="5" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <key id="55" parent="5" name="PRIMARY">
+      <ColNames>category_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="56" parent="6" name="city_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="57" parent="6" name="city">
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="58" parent="6" name="country_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="6" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <index id="60" parent="6" name="idx_fk_country_id">
+      <ColNames>country_id</ColNames>
+    </index>
+    <key id="61" parent="6" name="PRIMARY">
+      <ColNames>city_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="62" parent="6" name="fk_city_country">
+      <ColNames>country_id</ColNames>
+      <RefTableName>country</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>country_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <column id="63" parent="7" name="country_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="64" parent="7" name="country">
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="65" parent="7" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <key id="66" parent="7" name="PRIMARY">
+      <ColNames>country_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="67" parent="8" name="customer_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="68" parent="8" name="store_id">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="69" parent="8" name="first_name">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="70" parent="8" name="last_name">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="71" parent="8" name="email">
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="72" parent="8" name="address_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="73" parent="8" name="active">
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="74" parent="8" name="create_date">
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="75" parent="8" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <index id="76" parent="8" name="idx_fk_address_id">
+      <ColNames>address_id</ColNames>
+    </index>
+    <index id="77" parent="8" name="idx_fk_store_id">
+      <ColNames>store_id</ColNames>
+    </index>
+    <index id="78" parent="8" name="idx_last_name">
+      <ColNames>last_name</ColNames>
+    </index>
+    <key id="79" parent="8" name="PRIMARY">
+      <ColNames>customer_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="80" parent="8" name="fk_customer_address">
+      <ColNames>address_id</ColNames>
+      <RefTableName>address</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>address_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <foreign-key id="81" parent="8" name="fk_customer_store">
+      <ColNames>store_id</ColNames>
+      <RefTableName>store</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>store_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <trigger id="82" parent="8" name="customer_create_date"/>
+    <column id="83" parent="9" name="film_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="84" parent="9" name="title">
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="85" parent="9" name="description">
+      <DataType>text|0</DataType>
+    </column>
+    <column id="86" parent="9" name="release_year">
+      <DataType>year(4)|0</DataType>
+    </column>
+    <column id="87" parent="9" name="language_id">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="88" parent="9" name="original_language_id">
+      <DataType>tinyint(3) unsigned|0</DataType>
+    </column>
+    <column id="89" parent="9" name="rental_duration">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;3&apos;</DefaultExpression>
+    </column>
+    <column id="90" parent="9" name="rental_rate">
+      <DataType>decimal(4,2)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;4.99&apos;</DefaultExpression>
+    </column>
+    <column id="91" parent="9" name="length">
+      <DataType>smallint(5) unsigned|0</DataType>
+    </column>
+    <column id="92" parent="9" name="replacement_cost">
+      <DataType>decimal(5,2)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;19.99&apos;</DefaultExpression>
+    </column>
+    <column id="93" parent="9" name="rating">
+      <DataType>enum(&apos;G&apos;, &apos;PG&apos;, &apos;PG-13&apos;, &apos;R&apos;, &apos;NC-17&apos;)|0</DataType>
+      <DefaultExpression>&apos;G&apos;</DefaultExpression>
+    </column>
+    <column id="94" parent="9" name="special_features">
+      <DataType>set(&apos;Trailers&apos;, &apos;Commentaries&apos;, &apos;Deleted Scenes&apos;, &apos;Behind the Scenes&apos;)|0</DataType>
+    </column>
+    <column id="95" parent="9" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <index id="96" parent="9" name="idx_fk_language_id">
+      <ColNames>language_id</ColNames>
+    </index>
+    <index id="97" parent="9" name="idx_fk_original_language_id">
+      <ColNames>original_language_id</ColNames>
+    </index>
+    <index id="98" parent="9" name="idx_title">
+      <ColNames>title</ColNames>
+    </index>
+    <key id="99" parent="9" name="PRIMARY">
+      <ColNames>film_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="100" parent="9" name="fk_film_language">
+      <ColNames>language_id</ColNames>
+      <RefTableName>language</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>language_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <foreign-key id="101" parent="9" name="fk_film_language_original">
+      <ColNames>original_language_id</ColNames>
+      <RefTableName>language</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>language_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <trigger id="102" parent="9" name="ins_film"/>
+    <trigger id="103" parent="9" name="upd_film"/>
+    <trigger id="104" parent="9" name="del_film"/>
+    <column id="105" parent="10" name="actor_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="106" parent="10" name="film_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="107" parent="10" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <index id="108" parent="10" name="idx_fk_film_id">
+      <ColNames>film_id</ColNames>
+    </index>
+    <key id="109" parent="10" name="PRIMARY">
+      <ColNames>actor_id
+film_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="110" parent="10" name="fk_film_actor_actor">
+      <ColNames>actor_id</ColNames>
+      <RefTableName>actor</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>actor_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <foreign-key id="111" parent="10" name="fk_film_actor_film">
+      <ColNames>film_id</ColNames>
+      <RefTableName>film</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>film_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <column id="112" parent="11" name="film_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="113" parent="11" name="category_id">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="114" parent="11" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <index id="115" parent="11" name="fk_film_category_category">
+      <ColNames>category_id</ColNames>
+    </index>
+    <key id="116" parent="11" name="PRIMARY">
+      <ColNames>film_id
+category_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="117" parent="11" name="fk_film_category_category">
+      <ColNames>category_id</ColNames>
+      <RefTableName>category</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>category_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <foreign-key id="118" parent="11" name="fk_film_category_film">
+      <ColNames>film_id</ColNames>
+      <RefTableName>film</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>film_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <column id="119" parent="12" name="film_id">
+      <DataType>smallint(6)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="120" parent="12" name="title">
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="121" parent="12" name="description">
+      <DataType>text|0</DataType>
+    </column>
+    <index id="122" parent="12" name="idx_title_description">
+      <ColNames>title
+description</ColNames>
+    </index>
+    <key id="123" parent="12" name="PRIMARY">
+      <ColNames>film_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="124" parent="13" name="inventory_id">
+      <DataType>mediumint(8) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="125" parent="13" name="film_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="126" parent="13" name="store_id">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="127" parent="13" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <index id="128" parent="13" name="idx_fk_film_id">
+      <ColNames>film_id</ColNames>
+    </index>
+    <index id="129" parent="13" name="idx_store_id_film_id">
+      <ColNames>store_id
+film_id</ColNames>
+    </index>
+    <key id="130" parent="13" name="PRIMARY">
+      <ColNames>inventory_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="131" parent="13" name="fk_inventory_film">
+      <ColNames>film_id</ColNames>
+      <RefTableName>film</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>film_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <foreign-key id="132" parent="13" name="fk_inventory_store">
+      <ColNames>store_id</ColNames>
+      <RefTableName>store</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>store_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <column id="133" parent="14" name="language_id">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="134" parent="14" name="name">
+      <DataType>char(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="135" parent="14" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <key id="136" parent="14" name="PRIMARY">
+      <ColNames>language_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="137" parent="15" name="payment_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="138" parent="15" name="customer_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="139" parent="15" name="staff_id">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="140" parent="15" name="rental_id">
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="141" parent="15" name="amount">
+      <DataType>decimal(5,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="142" parent="15" name="payment_date">
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="143" parent="15" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <index id="144" parent="15" name="fk_payment_rental">
+      <ColNames>rental_id</ColNames>
+    </index>
+    <index id="145" parent="15" name="idx_fk_customer_id">
+      <ColNames>customer_id</ColNames>
+    </index>
+    <index id="146" parent="15" name="idx_fk_staff_id">
+      <ColNames>staff_id</ColNames>
+    </index>
+    <key id="147" parent="15" name="PRIMARY">
+      <ColNames>payment_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="148" parent="15" name="fk_payment_customer">
+      <ColNames>customer_id</ColNames>
+      <RefTableName>customer</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>customer_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <foreign-key id="149" parent="15" name="fk_payment_rental">
+      <ColNames>rental_id</ColNames>
+      <RefTableName>rental</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>rental_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <foreign-key id="150" parent="15" name="fk_payment_staff">
+      <ColNames>staff_id</ColNames>
+      <RefTableName>staff</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>staff_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <trigger id="151" parent="15" name="payment_date"/>
+    <column id="152" parent="16" name="rental_id">
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="153" parent="16" name="rental_date">
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="154" parent="16" name="inventory_id">
+      <DataType>mediumint(8) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="155" parent="16" name="customer_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="156" parent="16" name="return_date">
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="157" parent="16" name="staff_id">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="158" parent="16" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <index id="159" parent="16" name="idx_fk_customer_id">
+      <ColNames>customer_id</ColNames>
+    </index>
+    <index id="160" parent="16" name="idx_fk_inventory_id">
+      <ColNames>inventory_id</ColNames>
+    </index>
+    <index id="161" parent="16" name="idx_fk_staff_id">
+      <ColNames>staff_id</ColNames>
+    </index>
+    <index id="162" parent="16" name="rental_date">
+      <ColNames>rental_date
+inventory_id
+customer_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="163" parent="16" name="PRIMARY">
+      <ColNames>rental_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="164" parent="16" name="rental_date">
+      <ColNames>rental_date
+inventory_id
+customer_id</ColNames>
+      <UnderlyingIndexName>rental_date</UnderlyingIndexName>
+    </key>
+    <foreign-key id="165" parent="16" name="fk_rental_customer">
+      <ColNames>customer_id</ColNames>
+      <RefTableName>customer</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>customer_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <foreign-key id="166" parent="16" name="fk_rental_inventory">
+      <ColNames>inventory_id</ColNames>
+      <RefTableName>inventory</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>inventory_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <foreign-key id="167" parent="16" name="fk_rental_staff">
+      <ColNames>staff_id</ColNames>
+      <RefTableName>staff</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>staff_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <trigger id="168" parent="16" name="rental_date"/>
+    <column id="169" parent="17" name="staff_id">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="170" parent="17" name="first_name">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="171" parent="17" name="last_name">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="172" parent="17" name="address_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="173" parent="17" name="picture">
+      <DataType>blob|0</DataType>
+    </column>
+    <column id="174" parent="17" name="email">
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="175" parent="17" name="store_id">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="176" parent="17" name="active">
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="177" parent="17" name="username">
+      <DataType>varchar(16)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="178" parent="17" name="password">
+      <DataType>varchar(40)|0</DataType>
+    </column>
+    <column id="179" parent="17" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <index id="180" parent="17" name="idx_fk_address_id">
+      <ColNames>address_id</ColNames>
+    </index>
+    <index id="181" parent="17" name="idx_fk_store_id">
+      <ColNames>store_id</ColNames>
+    </index>
+    <key id="182" parent="17" name="PRIMARY">
+      <ColNames>staff_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="183" parent="17" name="fk_staff_address">
+      <ColNames>address_id</ColNames>
+      <RefTableName>address</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>address_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <foreign-key id="184" parent="17" name="fk_staff_store">
+      <ColNames>store_id</ColNames>
+      <RefTableName>store</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>store_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <column id="185" parent="18" name="store_id">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="186" parent="18" name="manager_staff_id">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="187" parent="18" name="address_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="188" parent="18" name="last_update">
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;CURRENT_TIMESTAMP&apos;</DefaultExpression>
+    </column>
+    <index id="189" parent="18" name="idx_fk_address_id">
+      <ColNames>address_id</ColNames>
+    </index>
+    <index id="190" parent="18" name="idx_unique_manager">
+      <ColNames>manager_staff_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="191" parent="18" name="idx_unique_manager">
+      <ColNames>manager_staff_id</ColNames>
+      <UnderlyingIndexName>idx_unique_manager</UnderlyingIndexName>
+    </key>
+    <key id="192" parent="18" name="PRIMARY">
+      <ColNames>store_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="193" parent="18" name="fk_store_address">
+      <ColNames>address_id</ColNames>
+      <RefTableName>address</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>address_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <foreign-key id="194" parent="18" name="fk_store_staff">
+      <ColNames>manager_staff_id</ColNames>
+      <RefTableName>staff</RefTableName>
+      <RefKeyName>PRIMARY</RefKeyName>
+      <RefColNames>staff_id</RefColNames>
+      <OnUpdate>restrict</OnUpdate>
+      <OnDelete>restrict</OnDelete>
+    </foreign-key>
+    <column id="195" parent="19" name="searchKey">
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="196" parent="19" name="searchInfo">
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="197" parent="20" name="actor_id">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="198" parent="20" name="first_name">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="199" parent="20" name="last_name">
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="200" parent="20" name="film_info">
+      <DataType>text|0</DataType>
+    </column>
+    <column id="201" parent="21" name="ID">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="202" parent="21" name="name">
+      <DataType>varchar(91)|0</DataType>
+    </column>
+    <column id="203" parent="21" name="address">
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="204" parent="21" name="zip code">
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="205" parent="21" name="phone">
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="206" parent="21" name="city">
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="207" parent="21" name="country">
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="208" parent="21" name="notes">
+      <DataType>varchar(6)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <column id="209" parent="21" name="SID">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="210" parent="22" name="FID">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="211" parent="22" name="title">
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="212" parent="22" name="description">
+      <DataType>text|0</DataType>
+    </column>
+    <column id="213" parent="22" name="category">
+      <DataType>varchar(25)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="214" parent="22" name="price">
+      <DataType>decimal(4,2)|0</DataType>
+      <DefaultExpression>&apos;4.99&apos;</DefaultExpression>
+    </column>
+    <column id="215" parent="22" name="length">
+      <DataType>smallint(5) unsigned|0</DataType>
+    </column>
+    <column id="216" parent="22" name="rating">
+      <DataType>enum(&apos;G&apos;, &apos;PG&apos;, &apos;PG-13&apos;, &apos;R&apos;, &apos;NC-17&apos;)|0</DataType>
+      <DefaultExpression>&apos;G&apos;</DefaultExpression>
+    </column>
+    <column id="217" parent="22" name="actors">
+      <DataType>text|0</DataType>
+    </column>
+    <column id="218" parent="23" name="FID">
+      <DataType>smallint(5) unsigned|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="219" parent="23" name="title">
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="220" parent="23" name="description">
+      <DataType>text|0</DataType>
+    </column>
+    <column id="221" parent="23" name="category">
+      <DataType>varchar(25)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="222" parent="23" name="price">
+      <DataType>decimal(4,2)|0</DataType>
+      <DefaultExpression>&apos;4.99&apos;</DefaultExpression>
+    </column>
+    <column id="223" parent="23" name="length">
+      <DataType>smallint(5) unsigned|0</DataType>
+    </column>
+    <column id="224" parent="23" name="rating">
+      <DataType>enum(&apos;G&apos;, &apos;PG&apos;, &apos;PG-13&apos;, &apos;R&apos;, &apos;NC-17&apos;)|0</DataType>
+      <DefaultExpression>&apos;G&apos;</DefaultExpression>
+    </column>
+    <column id="225" parent="23" name="actors">
+      <DataType>text|0</DataType>
+    </column>
+    <column id="226" parent="24" name="category">
+      <DataType>varchar(25)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="227" parent="24" name="total_sales">
+      <DataType>decimal(27,2)|0</DataType>
+    </column>
+    <column id="228" parent="25" name="store">
+      <DataType>varchar(101)|0</DataType>
+    </column>
+    <column id="229" parent="25" name="manager">
+      <DataType>varchar(91)|0</DataType>
+    </column>
+    <column id="230" parent="25" name="total_sales">
+      <DataType>decimal(27,2)|0</DataType>
+    </column>
+    <column id="231" parent="26" name="ID">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="232" parent="26" name="name">
+      <DataType>varchar(91)|0</DataType>
+    </column>
+    <column id="233" parent="26" name="address">
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="234" parent="26" name="zip code">
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="235" parent="26" name="phone">
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="236" parent="26" name="city">
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="237" parent="26" name="country">
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="238" parent="26" name="SID">
+      <DataType>tinyint(3) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <argument id="239" parent="27" name="p_film_id">
+      <DataType>int(11)|0</DataType>
+    </argument>
+    <argument id="240" parent="27" name="p_store_id">
+      <DataType>int(11)|0</DataType>
+    </argument>
+    <argument id="241" parent="27" name="p_film_count">
+      <ArgumentDirection>O</ArgumentDirection>
+      <DataType>int(11)|0</DataType>
+    </argument>
+    <argument id="242" parent="28" name="p_film_id">
+      <DataType>int(11)|0</DataType>
+    </argument>
+    <argument id="243" parent="28" name="p_store_id">
+      <DataType>int(11)|0</DataType>
+    </argument>
+    <argument id="244" parent="28" name="p_film_count">
+      <ArgumentDirection>O</ArgumentDirection>
+      <DataType>int(11)|0</DataType>
+    </argument>
+    <argument id="245" parent="29">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>decimal(5,2)|0</DataType>
+    </argument>
+    <argument id="246" parent="29" name="p_customer_id">
+      <DataType>int(11)|0</DataType>
+    </argument>
+    <argument id="247" parent="29" name="p_effective_date">
+      <DataType>datetime|0</DataType>
+    </argument>
+    <argument id="248" parent="30">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>int(11)|0</DataType>
+    </argument>
+    <argument id="249" parent="30" name="p_inventory_id">
+      <DataType>int(11)|0</DataType>
+    </argument>
+    <argument id="250" parent="31">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>tinyint(1)|0</DataType>
+    </argument>
+    <argument id="251" parent="31" name="p_inventory_id">
+      <DataType>int(11)|0</DataType>
+    </argument>
+    <argument id="252" parent="32" name="min_monthly_purchases">
+      <DataType>tinyint(3) unsigned|0</DataType>
+    </argument>
+    <argument id="253" parent="32" name="min_dollar_amount_purchased">
+      <DataType>decimal(10,2) unsigned|0</DataType>
+    </argument>
+    <argument id="254" parent="32" name="count_rewardees">
+      <ArgumentDirection>O</ArgumentDirection>
+      <DataType>int(11)|0</DataType>
+    </argument>
+  </database-model>
+</dataSource>

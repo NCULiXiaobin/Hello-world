@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ncu.dao.TempNumSignDao">
+    <select id="findByTempIndex" parameterType="String" resultType="TempNumSign">
+        SELECT *
+        FROM signdb.t_temp_num_sign
+        WHERE temp_index = #{temp_index}
+    </select>
+    <insert id="insertTempNumSign">
+        INSERT INTO signdb.t_temp_num_sign(temp_index,temp_num_index)
+        VALUES
+        (#{0},#{1})
+    </insert>
+    <delete id="deleteTempNumSign" parameterType="String">
+        DELETE FROM signdb.t_temp_num_sign
+        WHERE temp_index = #{temp_index}
+    </delete>
+</mapper>

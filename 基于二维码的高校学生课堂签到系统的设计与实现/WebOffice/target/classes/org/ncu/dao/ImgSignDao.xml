@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ncu.dao.ImgSignDao">
+    <select id="findCountImgIndexByKey" parameterType="String" resultType="int">
+        SELECT count(*) FROM signdb.t_temp_img_sign
+        WHERE temp_img_key = #{temp_img_key}
+    </select>
+    <select id="findImgSignedPeo" parameterType="String" resultType="String">
+        SELECT  temp_img_sign_people from signdb.t_temp_img_sign WHERE temp_img_key = #{temp_img_key}
+    </select>
+    <update id="ImgSignIn">
+        UPDATE  signdb.t_temp_img_sign SET temp_img_sign_people = concat_ws('+',temp_img_sign_people,#{0}) WHERE temp_img_key = #{1}
+    </update>
+</mapper>

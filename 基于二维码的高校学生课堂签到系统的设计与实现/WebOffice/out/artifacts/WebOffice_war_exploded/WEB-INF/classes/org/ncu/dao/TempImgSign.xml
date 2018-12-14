@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ncu.dao.TempImgSignDao">
+    <insert id="insertTempImgSign" parameterType="TempImgSign">
+        INSERT INTO signdb.t_temp_img_sign(temp_img_key,temp_img_index)
+        VALUES
+        (#{temp_img_key},#{temp_img_index})
+    </insert>
+    <select id="findImgIndexByKey" parameterType="String" resultType="TempImgSign">
+        SELECT * FROM signdb.t_temp_img_sign
+        WHERE temp_img_key = #{temp_img_key}
+    </select>
+    <delete id="deleteTempImgSign" parameterType="String">
+        DELETE FROM signdb.t_temp_img_sign
+        WHERE
+        temp_img_key = #{temp_img_key}
+    </delete>
+</mapper>

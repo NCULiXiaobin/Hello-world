@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ncu.dao.MajorDao">
+    <resultMap id="majorMap" type="Major">
+        <id column="major_id" property="major_id" />
+        <result column="major_name" property="major_name" />
+    </resultMap>
+    <select id="findAllMajor" resultMap="majorMap">
+        SELECT * FROM signdb.t_major
+    </select>
+    <select id="findMajorByName" parameterType="String" resultType="Major">
+        SELECT *
+        FROM signdb.t_major
+        WHERE major_name = #{major_name}
+    </select>
+</mapper>

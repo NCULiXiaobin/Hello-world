@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ncu.dao.CurseDao">
+    <resultMap id="CurseMap" type="Curse">
+        <id column="curse_id" property="curse_id"></id>
+        <result column="curse_major" property="curse_major"></result>
+        <result column="curse_name" property="curse_name"></result>
+    </resultMap>
+
+    <select id="findCurseByMajor" resultMap="CurseMap" parameterType="String">
+        SELECT * FROM signdb.t_curse
+        WHERE curse_major = #{curse_major}
+    </select>
+    <select id="findCurseByCurseName" resultType="int" parameterType="Curse">
+        SELECT curse_id FROM signdb.t_curse WHERE curse_name = #{curse_name} AND curse_major = #{curse_major}
+    </select>
+</mapper>

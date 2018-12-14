@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="lazyLoadingEnabled" value="false"/>
+    </settings>
+    <typeAliases>
+        <typeAlias alias="Teacher" type="org.ncu.pojo.Teacher"/>
+        <typeAlias alias="Major" type="org.ncu.pojo.Major"/>
+        <typeAlias alias="ClassInfo" type="org.ncu.pojo.ClassInfo"/>
+        <typeAlias alias="Student" type="org.ncu.pojo.Student"/>
+        <typeAlias alias="TempNumSign" type="org.ncu.pojo.TempNumSign"/>
+        <typeAlias alias="TempImgSign" type="org.ncu.pojo.TempImgSign"/>
+        <typeAlias alias="Curse" type="org.ncu.pojo.Curse"/>
+        <typeAlias alias="ClassCurse" type="org.ncu.pojo.ClassCurse"/>
+        <typeAlias alias="Sign" type="org.ncu.pojo.Sign"/>
+    </typeAliases>
+</configuration>

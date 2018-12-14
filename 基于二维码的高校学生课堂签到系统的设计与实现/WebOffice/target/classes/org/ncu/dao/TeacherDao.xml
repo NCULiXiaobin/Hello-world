@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ncu.dao.TeacherDao">
+    <select id="getTeacherCount" resultType="int" parameterType="int">
+        SELECT
+        count(*)
+        FROM t_teacher
+        WHERE teacher_account = #{teacher_account}
+    </select>
+    <select id="makeSurePassword" resultType="int">
+        SELECT
+            count(*)
+        FROM signdb.t_teacher
+        WHERE teacher_account = #{0} AND teacher_password = #{1}
+    </select>
+    <select id="getTeacherMes" resultType="Teacher">
+        SELECT
+        *
+        FROM t_teacher
+        WHERE teacher_account = #{0} AND teacher_password = #{1}
+    </select>
+    <update id="updateMyInfo" parameterType="Teacher">
+        UPDATE signdb.t_teacher
+        SET
+            teacher_name     = #{teacher_name},
+            teacher_account  = #{teacher_account},
+            teacher_password = #{teacher_password},
+            teacher_sex      = #{teacher_sex},
+            teacher_age      = #{teacher_age},
+            teacher_major    = #{teacher_major},
+            teacher_phone    = #{teacher_phone},
+            teacher_phoneex  = #{teacher_phoneex},
+            teacher_emile    = #{teacher_emile},
+            teacher_extra    = #{teacher_extra}
+        WHERE teacher_id = #{teacher_id}
+    </update>
+    <select id="findTeacherByAccount" parameterType="int" resultType="Teacher">
+        SELECT *
+        FROM signdb.t_teacher
+        WHERE teacher_account = #{teacher_account}
+    </select>
+</mapper>

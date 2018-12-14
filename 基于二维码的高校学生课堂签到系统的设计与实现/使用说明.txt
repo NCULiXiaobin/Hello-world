@@ -1,0 +1,7 @@
+----------除Android项目外，其余都使用Spring框架------------
+
+1.ManagerClient  管理员客户端（Java Swing编写）
+2.MyApplication  教师--手机端 （使用Android的WebView完成，服务器开启在WebOffice中）
+3.StudentApp     学生签到手机端  （使用Android界面语言编写界面）
+4.StudentSer     学生签到服务器
+5.webOffice      教师签到网页版（使用bootstrap框架，ssm框架）

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ncu.dao.NumSignDao">
+    <select id="findTempNumSign" parameterType="String" resultType="int">
+        SELECT count(*)
+        FROM signdb.t_temp_num_sign
+        WHERE temp_index = #{temp_index}
+    </select>
+    <update id="numSignIn">
+        UPDATE signdb.t_temp_num_sign SET temp_sign_people = concat_ws('+',temp_sign_people,#{0}) WHERE temp_index = #{1}
+    </update>
+    <select id="findNumSignedPeo" parameterType="String" resultType="String">
+        SELECT temp_sign_people FROM signdb.t_temp_num_sign WHERE temp_index = #{temp_index}
+    </select>
+</mapper>
