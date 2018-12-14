@@ -1,0 +1,78 @@
+<html>
+<meta charset="utf-8">
+<head>
+    <script src="js/jquery.min.js"></script>
+</head>
+
+<body onLoad="checkCookie()">
+<button onclick="clearCookie('alltime')">删除</button>
+<button id="startTime">开始</button>
+<button id="nowTime">时间</button>
+
+<div><p id="endTime"></p></div>
+<script>
+    var s = 60;
+    var InterValObj;
+    $("#startTime").click(function () {
+        $("#endTime").html(s);
+        s--;
+        InterValObj = window.setInterval(CountTime, 1000);
+        $("#startTime").attr("disabled", true);
+    });
+    function CountTime() {
+        $("#endTime").html(s);
+        s--;
+        if (s<0){
+            window.clearInterval(InterValObj);
+            alert("时间到");
+        }
+    }
+</script>
+<script>
+    //设置cookie
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*1000));
+        var expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + "; " + expires;
+    }
+    //获取cookie
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1);
+            if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
+    //清除cookie
+    function clearCookie(name) {
+        setCookie(name, "", -10000);
+    }
+    function checkCookie() {
+        var time = getCookie("alltime");
+        var leavetime = getCookie("leaveTime");
+        if (time != "") {
+            $("#startTime").attr("disabled", true);
+            var InterValObj = window.setInterval(CountTime1, 1000);
+            function CountTime1() {
+                $("#endTime").html(time);
+                time--;
+                if (time<0){
+                    window.clearInterval(InterValObj);
+                    alert("时间到");
+                }
+            }
+        }
+    }
+    window.onbeforeunload = function (event) {
+        var t_time = $("#endTime").html();
+        var leavetime = new Date().getTime();
+        setCookie("alltime",t_time,t_time);
+        setCookie("leaveTime",leavetime,t_time);
+    }
+</script>
+</body>
+</html>

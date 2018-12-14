@@ -1,0 +1,43 @@
+<c:if test="${!empty cookie.imgTeacher.value}">
+    <input type="button" value="查看二维码" id="lookImgSign" data-toggle="modal" data-target="#imgModle" hidden>
+    <script>
+        $("#lookImgSign").click(function () {
+            var makeUseAccount = $("#makeUseName").val();
+            var makeUseMajor = $("#makeUseMajor").val();
+            var selectClass = $("#selectClass option:selected").text();
+            var makeUseCurse = $("#makeUseCurse").val();
+            var week = $("#week option:selected").text();
+            var indexCurse = $("#indexCurse option:selected").text();
+            $("#erweima").show();
+            $("#erweima").attr("src","code.html?makeUseAccount="+makeUseAccount+"&&makeUseMajor="+makeUseMajor+"&&selectClass="+selectClass
+                +"&&makeUseCurse="+makeUseCurse+"&&week="+week+"&&indexCurse="+indexCurse);
+        });
+
+        $("#lookImgSign").trigger("click");
+
+    </script>
+</c:if>
+<div class="modal fade" id="imgModle"  data-backdrop="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    模态框（Modal）标题
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p class="center-block" style="height:200px;width:200px;"><img  id="erweima"/></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="closeImgSign">关闭
+                </button>
+                <button type="button" class="btn btn-primary" id="endImgSign">
+                    结束签到
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

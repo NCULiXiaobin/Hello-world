@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body style="padding: 0;margin: 0">
+<div id="app">
+    <div v-for="item in hh">
+        <div class="card-title">{{message}}
+        </div>
+        <div class="card-body">
+            <div style="margin-top: 10px">
+                <input type="text">
+                <input type="text">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            hh:[1,2,3,4],
+            message:'hhhhhhh'
+        }
+    })
+</script>
+<style>
+    .card-title{
+        position: relative;
+        left: 20px;
+        top: 10px;
+        padding: 0 10px;
+        display: inline-block;
+        text-align: center;
+        background-color: white;
+        z-index: 9999;
+    }
+    .card-body{
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+
+</style>
+</body>
+</html>

@@ -1,0 +1,9 @@
+      /**
+       * 监听滚动条滚动事件
+       * 固定表头操作
+       * @param event
+       */
+      handleScroll (event) {
+        let scrollTop = event.target.scrollTop;
+        this.$refs['thead'].style.transform = 'translateY(' + scrollTop + 'px)';
+      },

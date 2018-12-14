@@ -1,0 +1,10 @@
+用户被锁定问题解决
+
+控制台：
+
+sqlplus /nolog
+
+conn sys/orcl@192.168.123.142/orcl as sysdba 
+
+
+alter user jr_dac account unlock;

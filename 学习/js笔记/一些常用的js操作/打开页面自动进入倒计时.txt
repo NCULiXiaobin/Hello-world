@@ -1,0 +1,49 @@
+<c:if test="${cookie.keyboo.value!=null}">
+
+ <div class="col-lg-4 col-sm-4 col-md-4 col-md-offset-4 col-sm-offset-4" style="margin-top: 60px;">
+        <div id="showUseKeybord" hidden>
+            <h1 class="text-center" id="numKeybord1" style="line-height: 200px"><c:out value="${cookie.keyboo.value}"/></h1>
+        </div>
+        <div class="panel panel-warning" id="showEndTime" style="margin-top: 20px" hidden>
+            <div class="panel-heading">
+                <h4>签到结束倒计时
+                </h4>
+                <input type="button" class="btn bg-info" id="lookLeftTime" value="查看剩余时间">
+                <input type="button" class="btn bg-danger" id="endSign" onclick="disp_confirm()" value="结束签到" >
+            </div>
+            <div class="panel-body">
+                <h2 id="endTime"></h2>
+            </div>
+        </div>
+    </div>
+    <script>
+        var InterValObj;
+        var s;
+        var kkb = $("#numKeybord1").html();
+        $("#lookLeftTime").click(function () {
+            $("#lookLeftTime").attr("disabled",true);
+            $.ajax({
+                type:"GET",
+                url:encodeURI("lookLeftTime.html?kkb="+kkb),
+                dataType:"text",
+                contentType : "application/json;charset=UTF-8",
+                success:function(data) {
+                    s = data;
+                    InterValObj = window.setInterval(CountTime, 1000);
+                }
+            });
+        });
+        function CountTime() {
+            if (s>=0){
+                $("#endTime").html(s);
+                s--;
+            }else {
+                alert("签到结束！！");
+                $("#new").modal("show");
+                window.clearInterval(InterValObj);
+            }
+        }
+        $("#lookLeftTime").trigger("click");
+    </script>
+
+</c:if>

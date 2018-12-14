@@ -1,0 +1,3 @@
+ Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize(600,500);
+        this.setLocation(screenSize.width2-6002,screenSize.height2-5002);

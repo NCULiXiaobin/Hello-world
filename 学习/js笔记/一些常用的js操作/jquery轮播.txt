@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,
+                                     initial-scale=1.0,
+                                     maximum-scale=1.0,
+                                     user-scalable=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <style>
+        .banner{width: 992px; height: 420px; margin: 100px auto 0; position: relative;}
+        .imgList{width: 992px; height: 420px; position: relative;}
+        .imgList li{width: 992px; height: 420px; position: absolute; left: 0; top: 0; display: none;}
+        .btnList{position: absolute; right: 10px; bottom: 10px;}
+        .btnList li{width: 30px; height: 20px; color: #fff; background: rgba(0,0,0,0.3); margin-right: 10px;
+            float: left; text-align: center; line-height:20px; border: 1px solid #CCC; cursor: pointer;list-style-type: none}
+        .btnList li.current{background: rgba(0,0,0,0.65);}
+        .leftBtn,.rightBtn{width: 41px; height: 69px; position: absolute; top: 50%; margin-top: -35px;
+            background: url(img/left.png) no-repeat center center rgba(0,0,0,.65); display: none;
+            cursor: pointer;}
+        .leftBtn{left: 0; }
+        .rightBtn{right: 0; background-image: url(img/right.png);}
+        .banner:hover .leftBtn,.banner:hover .rightBtn{display: block;}
+    </style>
+</head>
+<body>
+<div class="banner">
+    <ul class="imgList">
+        <li style="display:block;"><a href="javascript:;"><img src="img/1.jpg" height="420" width="992" /></a></li>
+        <li><a href="javascript:;"><img src="img/2.jpg" height="420" width="992" /></a></li>
+        <li><a href="javascript:;"><img src="img/3.jpg" height="420" width="992" /></a></li>
+        <li><a href="javascript:;"><img src="img/4.png" height="420" width="992" /></a></li>
+        <li><a href="javascript:;"><img src="img/5.jpg" height="420" width="992" /></a></li>
+    </ul>
+    <!--标签的 href 属性用于指定超链接目标的 URL，href 属性的值可以是任何有效文档的相对或绝对 URL，-->
+    <!--包括片段标识符和 JavaScript 代码段。这里的href="javascript:;"，其中javascript:是伪协议，-->
+    <!--它可以让我们通过一个链接来调用javascript函数.而采用这个方式 javascript:;可以实现A标签的点击事件运行时，-->
+    <!--如果页面内容很多，有滚动条时，页面不会乱跳，用户体验更好。-->
+    <ol class="btnList">
+        <li class="current">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li style="margin-right:0;">5</li>
+    </ol>
+    <div class="leftBtn"></div>
+    <div class="rightBtn"></div>
+</div>
+<script>
+    //定义一个变量，用来模拟不断改变的下标
+    var num=0;
+    var nextFn=function(){
+        //让上一张淡出
+        $('.imgList li').eq(num).fadeOut(1000);
+        num++;
+        if(num>4){
+            num=0;
+        }
+        //让下一个角标增加current...
+        $('.btnList li').eq(num).addClass('current').siblings('li').removeClass('current');
+        //addClass 给一个类名后继续添加添加新的类名
+        //siblings 遍历所有类名相同的元素
+        //让下一张淡入
+        $('.imgList li').eq(num).fadeIn(1000);
+    }
+
+    var prevFn=function(){
+        //让上一张淡出
+        $('.imgList li').eq(num).fadeOut(1000);
+        num--;
+        if(num<0){
+            num=4;
+        }
+        //让上一个角标增加current...
+        $('.btnList li').eq(num).addClass('current').siblings('li').removeClass('current');
+        //让下一张淡入
+        $('.imgList li').eq(num).fadeIn(1000);
+    }
+
+    $('.rightBtn').click(nextFn);
+    $('.leftBtn').click(prevFn);
+    $('.btnList li').click(function(event) {
+        //num未修改前代表上一张
+        $('.imgList li').eq(num).stop().fadeOut(1000);
+        num=$(this).index();
+        //num修改后代表下一张
+        //让下一个角标增加current...
+        $('.btnList li').eq(num).addClass('current').siblings('li').removeClass('current');
+        //让下一张淡入
+        $('.imgList li').eq(num).stop().fadeIn(1000);
+    });
+</script>
+</body>
+</html>

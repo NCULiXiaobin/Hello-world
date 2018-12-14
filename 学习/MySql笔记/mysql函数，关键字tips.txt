@@ -1,0 +1,82 @@
+unsigned 将数字类型无符号化，这与C和C++这些程序语言的unsigned含义相同。
+INT的类型范围-2 147 483 648~2 147 483 647
+INT UNSIGNED范围0~4 294 967 295
+看起来是个不错的属性选项，特别是对于主键自增长的类型，因为一般来说，用户都希望主键是非负数，
+
+collate  指定表的默认排序规则
+
+default(**)  给列定义一个默认值，如果没有插入则使用默认值
+
+
+zerofill    如果宽度小于设定的宽度(这里宽度为4),则自动填充0，需要注意的是，这只是最后显示的结果，在MySQL中实际存储的还是原来的值
+
+
+distinct  去除重复行  一般比较与group by
+
+
+delimiter命令来更改语句分隔符 delimiter |  //将；结束符改为以|结束
+
+
+BIT_COUNT( expr )：返回 expr 的二进制表达式中”1“的个数。           //例子在mysql常见查询6.计算每天的访问量
+     例如：29 = 11101 则：BIT_COUNT（29）= 4；
+BIT_OR( expr )：返回 expr 中所有比特的bitwise OR。计算执行的精确度为64比特(BIGINT) 。
+　  例如：上面例子中，2000年02月中有一条2号的记录两条23号的记录，所以"1<<day"表示出来就是 “1＜＜2”和“1＜＜23”，得到二进制数 100 和 100000000000000000000000 。然后再OR运算。即 100 OR 10000000000000000000000 OR 10000000000000000000000 = 100000000000000000000100；这样再用BIT_COUNT处理得出的值就是2，自动去除了重复的日期。
+“1<<2”意思实在1的后面添加两个0 “1<<23”在1的后面添加23个0
+
+
+
+用户自定义对象：通过@**** 来生成用户自定义对象来保存数据。SET，=或者 :=可以用作赋值运算符。
+您也可以在除了以外的语句中为用户变量赋值SET。在这种情况下，赋值运算符必须是 :=而不是 =因为后者=在非SET 语句中被视为比较运算符 ：
+mysql> SET @t1=1, @t2=2, @t3:=4;
+mysql> SELECT @t1, @t2, @t3, @t4 := @t1+@t2+@t3;
+mysql> SET @c = "c1";
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SET @s = CONCAT("SELECT ", @c, " FROM t");
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> PREPARE stmt FROM @s;
+Query OK, 0 rows affected (0.04 sec)
+Statement prepared
+
+mysql> EXECUTE stmt;
++----+
+| c1 |
++----+
+|  0 |
++----+
+|  1 |
++----+
+2 rows in set (0.00 sec)
+mysql> DEALLOCATE PREPARE stmt;
+
+
+
+
+LAST_INSERT_ID()SQL函数或mysql_insert_id()C API函数检索最近自动生成的 值 //@last := last_insert_id();
+
+
+order by keyword 通过关键词给排序
+
+CONCAT（）函数用于将多个字符串连接成一个字符串，mysql CONCAT(str1,str2,…)     
+返回结果为连接参数产生的字符串。如有任何一个参数为NULL ，则返回值为 NULL。或许
+有一个或多个参数。 如果所有参数均为非二进制字符串，则结果为非二进制字符串。 如果自
+变量中含有任一二进制字符串，则结果为一个二进制字符串。一个数字参数被转化为与之相
+等的二进制字符串格式；若要避免这种情况，可使用显式类型 cast, 例如： SELECT CONCAT(CAST(int_col AS CHAR), char_col)
+mysql CONCAT_WS(separator,str1,str2,…) 
+CONCAT_WS() 代表 CONCAT With Separator ，是CONCAT()的特殊形式。   第一个参数
+是其它参数的分隔符。分隔符的位置放在要连接的两个字符串之间。分隔符可以是一个字符
+串，也可以是其它参数。如果分隔符为 NULL，则结果为 NULL。函数会忽略任何分隔符参
+数后的 NULL 值。
+mysql> SELECT CONCAT_WS(’,',’First name’,'Second name’,'Last Name’);
+-> ‘First name,Second name,Last Name’
+mysql> SELECT CONCAT_WS(’,',’First name’,NULL,’Last Name’);
+-> ‘First name,Last Name’
+
+
+
+
+
+
+
+

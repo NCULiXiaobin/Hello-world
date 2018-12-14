@@ -1,0 +1,25 @@
+ora 12514  服务启动失败  
+1.先检查ora 11g home 服务是否启动成功
+2.进入cmd  sqlplus /nolog               conn /as sysdba         startup
+使用上述方法启动服务还报错的话：
+E:\app\LiXiaobin\product\instantclient_11_2\NETWORK\ADMINtnsnames.ora\tnsnames.ora  打开
+找到
+ORCL =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orcl)
+    )
+  )
+
+复制(ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))
+
+打开E:\app\LiXiaobin\admin\orcl\pfile\init.ora.1072017145914
+
+将复制的值粘贴到local_listener = “”引号里面
+
+
+3.在cmd  sql环境下输入  startup pfile = “E:\app\LiXiaobin\admin\orcl\pfile\init.ora.1072017145914” 
+
+4.完成
