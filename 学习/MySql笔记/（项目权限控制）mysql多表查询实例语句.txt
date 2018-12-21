@@ -1,0 +1,28 @@
+/***************************************
+（messageid   消息类型表 存放消息类型，消息编号，以及消息提醒配置信息）
+（opmsgrights 消息权限表，roleid，userid，msgid ）//roleid为-1时根据userid控制权限，userid为-1时通过
+  查询kd_rolemember表userid与roleid的对应关系过滤控制权限
+（kd_rolemember  角色userid用户roleid关系表）
+****************************************/
+select a.msgid,
+       a.msgname,
+       a.msgsound,
+       a.soundflag,
+       a.flag1,
+       nvl(b.rightflag, '0') as rightflag
+  from messageid a
+ inner join (select msgid, max(rightflag) as rightflag
+               from (select msgid, '1' as rightflag
+                       from opmsgrights
+                      where roleid = '-1'
+                        and userid = 8888
+                     union all
+                     select msgid, '2' as rightflag
+                       from opmsgrights
+                      where roleid in (select roleid
+                                         from kd_rolemember
+                                        where userid = 8888)
+                        and userid = '-1') a
+              group by msgid) b
+    on a.msgid = b.msgid
+ order by msgid
