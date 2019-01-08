@@ -1,0 +1,63 @@
+export default function (ajaxParam) {
+  return new Promise((resolve, reject) => {
+    let p = {
+      url: (ajaxParam.url ? ajaxParam.url : '/ajax_fm.do') + '?_t=' + new Date().getTime(),
+      data: ajaxParam.data || {},
+      async: ajaxParam.async === undefined ? true : ajaxParam.async,
+      type: ajaxParam.type ? ajaxParam.type : 'POST',
+      contentType: ajaxParam.contentType ? ajaxParam.contentType : 'text',
+      dataType: ajaxParam.dataType ? ajaxParam.dataType : 'json',
+      cache: false,
+      error: function (jqXHR, textStatus, errorThrown) {
+        if (ajaxParam.showLoading !== false) {
+          Vue.prototype.$uiLoading.error()
+        }
+        reject(jqXHR, textStatus, errorThrown)
+      },
+      dataFilter: function (data) {
+        return data
+      },
+      success: function (data, textStatus, jqXHR) {
+        if (ajaxParam.showLoading !== false) {
+          Vue.prototype.$uiLoading.finish()
+        }
+        let res = data
+        if (res) { // 判断成功回调是否有数据
+          res = (p.dataType === 'json') ? res : xml2json(res, 'response')
+          let timeout = checkTimeout(res)
+          if (!timeout) return false
+        }
+        resolve(res)
+      }
+    }
+
+    // 前端请求为xml格式
+    if (p.url.indexOf('/ajax_fm.do') !== -1) {
+      if (isPlainObject(ajaxParam.data)) ajaxParam.data = [ajaxParam.data]
+
+      if (ajaxParam.data.length === 1) {
+        ajaxParam.data[0].param_ext = ajaxParam.data[0].param_ext ? ajaxParam.data[0].param_ext : {}
+      }
+      let xmlStr = '<?xml version="1.0" encoding="UTF-8"?><request>'
+      for (let i = 0; i < ajaxParam.data.length; i++) {
+        xmlStr += '<object obj_code="' + ajaxParam.data[i].obj_code + '" obj_method="' + (ajaxParam.data[i].obj_method || 'bexData') + '">' +
+                    _addParam2str('param', ajaxParam.data[i].param) +
+                    _addParam2str('param_ext', ajaxParam.data[i].param_ext) +
+                    _addParam2str('param_act', ajaxParam.data[i].param_act) +
+                    '</object>'
+      }
+      xmlStr += '</request>'
+      p.data = xmlStr
+    }
+
+    // 开发环境下，配置代理服务器的上下文，用于甚至保存cookie信息
+    p.url = config.dev_context + p.url
+    if (ajaxParam.showLoading !== false) {
+      // 加载进度条
+      Vue.prototype.$uiLoading.start()
+    }
+
+    // eslint-disable-next-line no-undef
+    $.ajax(p)
+  })
+}

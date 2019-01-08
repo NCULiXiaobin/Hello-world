@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	<!-- 此处init-method为初始化excle配置信息   通过property给ExcelConfigServiceImpl下的resource变量注入 -->
+    <bean name="excelParamInit" class="com.szkingdom.kamm.core.excel.config.service.impl.ExcelConfigServiceImpl" init-method="readConfig">
+        <property name="resource"
+                  value="WEB-INF/config/spring/excel/jros-excel-param.xml" />
+    </bean>
+</beans>

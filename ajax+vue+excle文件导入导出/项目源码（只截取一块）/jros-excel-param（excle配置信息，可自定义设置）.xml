@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <excel id="1" lbmcode="62001047" type="1" model="1" tablename="" data_start_row="1" name="员工名单">
+        <col field="managercode" index="0" require="true" width="3"/>
+        <col field="staffid" index="1" require="true" width="12"/>
+        <col field="certificatetype" index="2" require="true" width="2"/>
+        <col field="certificateno" index="3" require="true" width="32"/>
+        <col field="investorname" index="4" require="true" width="120"/>
+        <col field="stafftype" index="5" require="true" width="1"/>
+    </excel>
+</root>
