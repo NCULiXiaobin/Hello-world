@@ -1,0 +1,50 @@
+--删除表空间
+drop tablespace kpmsdata including contents and datafiles;
+drop tablespace kpms_hisdata including contents and datafiles;
+
+--创建表空间 '+DG_DATA'代替具体路径
+create tablespace kpmsdata logging datafile 'F:\app\Administrator\oradata\orcl\kpms_data.dbf' size 1024M autoextend on next 100M;
+create tablespace kpms_hisdata logging datafile 'F:\app\Administrator\oradata\orcl\kpms_hisdata.dbf' size 1024M autoextend on next 100M;
+
+-- 创建kpms用户、赋权
+
+drop user kpms cascade;
+
+create user kpms identified by kpms default tablespace kpmsdata temporary tablespace temp;
+grant connect,resource,dba to kpms;
+grant update on dual to kpms;
+
+-- 创建kpms_his用户、赋权
+
+drop user kpms_his cascade;
+
+create user kpms_his identified by kpms_his default tablespace kpms_hisdata temporary tablespace temp;
+grant connect,resource,dba to kpms_his;
+
+
+
+--查看权限
+select grantee,privilege from dba_sys_privs where grantee='RESOURCE' order by privilege;
+
+		GRANTEE                              PRIVILEGE
+ 
+------------------------------ ----------------------------------------
+ RESOURCE                            CREATE CLUSTER
+ RESOURCE                            CREATE INDEXTYPE
+ RESOURCE                            CREATE OPERATOR
+ RESOURCE                            CREATE PROCEDURE
+ RESOURCE                            CREATE SEQUENCE
+ RESOURCE                            CREATE TABLE
+ RESOURCE                            CREATE TRIGGER
+ RESOURCE                            CREATE TYPE
+ 8 rows selected.
+
+
+select grantee,privilege from dba_sys_privs where grantee='CONNECT' order by privilege;
+ 
+		GRANTEE                              PRIVILEGE
+ ------------------------------ ----------------------------------------
+ CONNECT                             CREATE SESSION
+
+--oracle 限制表空间单独的一个文件不超过32G, 超过的部分需要加表空间的数据文件
+alter tablespace kpmshisspace add datafile'F:\Oracle\OraData\KPMSHISspace_02.DBF' size 20000M autoextend on next 500m;
